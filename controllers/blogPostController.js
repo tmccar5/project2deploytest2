@@ -5,8 +5,14 @@ const router = express.Router()
 const MongoBlogPostModel = require('../models/blogPostMongoose');
 
 router.get('/', async (req,res) => {
-    const allPosts = await MongoBlogPostModel.find()
-    res.json(allPosts)
+    console.log('WE HIT /blog route!!!')
+    // const allPosts = await MongoBlogPostModel.find()
+    // res.json(allPosts)
+    var fakeData = [
+        {title: 'TOm'},
+        {title: 'Lee'},
+    ]
+    res.json(fakeData)
 });
 
 router.post('/', async (req,res) => {

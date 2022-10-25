@@ -1,52 +1,37 @@
 import './App.css';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import AllPosts from './Components/AllPosts';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+import HomePage from './Pages/HomePage';
+import GrabDataTest from './Pages/GrabDataTest';
 
 function App() {
-  const [title, setTitle]= useState('')
-  const [body, setBody] = useState('')
-  const [blogPosts, setBlogPosts] = useState([])
+  
 
-  const grabPosts = async () => {
-    const posts = await fetch('/blog')
-    const cleanPosts = await posts.json()
-    setBlogPosts(cleanPosts)
-  }
-
-  const save = async () => {
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        title: title,
-        body: body
-      })
-    };
-    const data = await fetch('/blog', requestOptions)
-    const cleanData = await data.json()
-    console.log('We saved!', cleanData)
-    grabPosts()
-  }
-
-  useEffect(()=> {
-    grabPosts()
-  },[])
-
-  console.log('blogPosts', blogPosts)
   return (
     <div className="App">
-     <h1> Add a post !!!!</h1>
+      <BrowserRouter>
+      <div>
+        <hr />
 
-      <div className="formContainer">
-          <p style={{textAlign: 'left'}}>Title</p>
-          <input onChange={(e)=>{setTitle(e.target.value)}}style={{display: 'block'}}></input>
-          <p style={{textAlign: 'left'}}>Body</p>
-          <textarea onChange={(e)=>{setBody(e.target.value)}} style={{display: 'block'}}></textarea>
-          <button className={'saveButton'} onClick={save}>Save</button>
+        {/*
+          A <Switch> looks through all its children <Route>
+          elements and renders the first one whose path
+          matches the current URL. Use a <Switch> any time
+          you have multiple routes, but you want only one
+          of them to render at a time
+        */}
+        <Routes>
+          <Route exact path="/" element={<HomePage />} />
+          <Route exact path="/grabDataTest" element={<GrabDataTest />} />
+            {/* <HomePage /> */}
+          {/* </Route> */}
+        </Routes>
       </div>
-
-      <AllPosts posts={blogPosts}/>
+    </BrowserRouter>
     </div>
   );
 }

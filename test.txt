@@ -1,0 +1,30 @@
+import {useState} from 'react';
+
+function GrabDataTest() {
+    const [blogData, setBlogData] = useState([])
+    // const data = await fetch('/blog', requestOptions)
+    // const cleanData = await data.json()
+    
+    const grabData = async () => {
+        const dataFromBackend = await fetch('/blog')
+        const cleanDataFromBackend = await dataFromBackend.json()
+
+        console.log(cleanDataFromBackend)
+
+        setBlogData(cleanDataFromBackend)
+    }
+
+    return(
+
+        <div>
+            <button onClick={grabData}>Grab Blog Posts!</button>
+            {blogData.map((eachThing)=> {
+                return (
+                    <h1>{eachThing.title}</h1>
+                )
+            })}
+        </div>
+    );
+
+}
+export default GrabDataTest;
