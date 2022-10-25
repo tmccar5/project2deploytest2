@@ -20,14 +20,17 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 // so i can see req.body in post routes
 app.use(express.json())
 
-app.use('/blog', blogPostController);
+// app.use('/blog', blogPostController);
 
-app.use(express.static(path.join(__dirname, 'front-end-react', 'build')))
+// app.use(express.static(path.join(__dirname, 'front-end-react', 'build')))
+
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'))
+// })
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'))
+  res.send('hello')
 })
-
 app.listen(process.env.PORT, () => {
   console.log(`Example app listening on port`)
 })
