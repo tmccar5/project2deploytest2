@@ -22,13 +22,8 @@ app.use(express.json())
 
 app.use('/blog', blogPostController);
 
-// app.use(express.static(path.join(__dirname, 'front-end-react', 'build')))
-
 app.use(express.static(path.join(__dirname, 'frontEndReact', 'build')))
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontEndReact', 'build', 'index.html'))
-})
 
 app.listen(process.env.PORT, () => {
   console.log(`Example app listening on port:`, process.env.PORT)
